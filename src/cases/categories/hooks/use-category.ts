@@ -37,6 +37,8 @@ export function useUpdateCategory() {
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: ['categories'] })
       queryClient.invalidateQueries({ queryKey: ['category', id] })
+      // a lista de produtos mostra o nome da categoria
+      queryClient.invalidateQueries({ queryKey: ['products'] })
     },
   })
 }

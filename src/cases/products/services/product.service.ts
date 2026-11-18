@@ -4,8 +4,9 @@ import type { CreateProductDTO, ProductDTO, UpdateProductDTO } from '../dtos/pro
 const ENDPOINT = '/products'
 
 export const ProductService = {
+  // o CMS precisa ver também os produtos inativos para poder reativá-los
   async listAll(): Promise<ProductDTO[]> {
-    const result = await api.get<ProductDTO[]>(ENDPOINT)
+    const result = await api.get<ProductDTO[]>(ENDPOINT, { params: { includeInactive: true } })
     return result.data
   },
 

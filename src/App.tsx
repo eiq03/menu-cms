@@ -5,6 +5,7 @@ import { ProductPage } from "./pages/products/product-page"
 import { SpotPage } from "./pages/spots/spot-page"
 import { GuestCheckPage } from "./pages/guest-checks/guest-check-page"
 import { GuestCheckDetailPage } from "./pages/guest-checks/guest-check-detail-page"
+import { OrderKanbanPage } from "./pages/orders/order-kanban-page"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="spots" element={<SpotPage />} />
         <Route path="guest-checks" element={<GuestCheckPage />} />
         <Route path="guest-checks/:id" element={<GuestCheckDetailPage />} />
+        <Route path="orders" element={<OrderKanbanPage />} />
       </Route>
     </Routes>
   )

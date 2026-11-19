@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom"
 import { cn } from "cn"
-import { MapPin, Receipt, Tags, Utensils } from "lucide-react"
+import { ClipboardList, MapPin, Receipt, Tags, Utensils } from "lucide-react"
 
 const navItems = [
     { to: '/categories', label: 'Categorias', icon: Tags },
     { to: '/products', label: 'Produtos', icon: Utensils },
     { to: '/spots', label: 'Mesas', icon: MapPin },
     { to: '/guest-checks', label: 'Comandas', icon: Receipt },
+    { to: '/orders', label: 'Kanban Pedidos', icon: ClipboardList },
 ]
 
 export function AppNav() {

@@ -11,3 +11,10 @@ const dateTimeFormatter = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short',
 export function formatDateTime(value: string): string {
   return dateTimeFormatter.format(new Date(value))
 }
+
+const timeFormatter = new Intl.DateTimeFormat('pt-BR', { timeStyle: 'short' })
+
+// ex.: "21:54"
+export function formatTime(value: string): string {
+  return timeFormatter.format(new Date(value))
+}

@@ -1,3 +1,4 @@
+import type { GuestCheckDTO } from '@/cases/guest-checks/dtos/guest-check.dto'
 import type { ProductDTO } from '@/cases/products/dtos/product.dto'
 
 export type OrderStatus = 'NEW' | 'PREPARING' | 'READY' | 'DELIVERED'
@@ -23,4 +24,5 @@ export interface OrderDTO {
     total: string;
     status: OrderStatus;
     items: OrderItemDTO[];
+    guestCheck?: Pick<GuestCheckDTO, 'id' | 'status' | 'spot'>; // só vem no GET /orders
 }

@@ -4,9 +4,12 @@ import { ArrowLeft, CircleAlert, MapPin } from "lucide-react"
 import { Alert, AlertTitle } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { FeedbackAlert } from "@/components/feedback-alert"
 import { QueryState } from "@/components/query-state"
+import { useFeedback } from "@/hooks/use-feedback"
 import { formatCurrency, formatDateTime } from "@/lib/format"
 import { useGuestCheck } from "@/cases/guest-checks/hooks/use-guest-check"
+import { OrderCard } from "@/cases/orders/components/order-card"
 
 export function GuestCheckDetailPage() {
 
@@ -14,7 +17,11 @@ export function GuestCheckDetailPage() {
   const { id = '' } = useParams()
 
   const { data: guestCheck, isPending, isError, error } = useGuestCheck(id)
+  const { feedback, showSuccess, showError } = useFeedback()
   const notFound = isAxiosError(error) && (error.response?.status === 404 || error.response?.status === 400)
+
+  // pedidos em ordem de criação (Pedido 1, Pedido 2...)
+  const orders = [...(guestCheck?.orders ?? [])].sort((a, b) => a.createdAt.localeCompare(b.createdAt))
 
   return (
     <div className="flex flex-col gap-6">
@@ -27,6 +34,8 @@ export function GuestCheckDetailPage() {
           {guestCheck ? `Comanda - ${guestCheck.spot.name}` : 'Comanda'}
         </h2>
       </div>
+
+      <FeedbackAlert feedback={feedback} />
 
       {notFound ? (
         <Alert variant="destructive">
@@ -41,6 +50,7 @@ export function GuestCheckDetailPage() {
           emptyMessage="Comanda não encontrada."
         >
           {guestCheck && (
+            <>
             <div className="grid grid-cols-2 gap-4 rounded-xl border border-border/70 bg-card p-5 lg:grid-cols-4">
               <div className="flex flex-col gap-1">
                 <span className="text-sm text-muted-foreground">Mesa</span>
@@ -64,6 +74,27 @@ export function GuestCheckDetailPage() {
                 <span className="text-lg font-semibold">{formatCurrency(guestCheck.total)}</span>
               </div>
             </div>
+
+            <section className="flex flex-col gap-4">
+              <h3 className="text-lg font-semibold uppercase">
+                Pedidos ({orders.length})
+              </h3>
+
+              {orders.length === 0 ? (
+                <p className="text-muted-foreground">Nenhum pedido nesta comanda.</p>
+              ) : (
+                orders.map((order, index) => (
+                  <OrderCard
+                    key={order.id}
+                    order={order}
+                    number={index + 1}
+                    onStatusSuccess={showSuccess}
+                    onStatusError={showError}
+                  />
+                ))
+              )}
+            </section>
+            </>
           )}
         </QueryState>
       )}

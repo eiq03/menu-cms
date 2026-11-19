@@ -9,7 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { useDeleteCategory } from "../hooks/use-category"
+import { useDeleteCategory } from "../hooks/use-categories"
 import type { CategoryDTO } from "../dtos/category.dto"
 
 interface CategoryDeleteDialogProps {

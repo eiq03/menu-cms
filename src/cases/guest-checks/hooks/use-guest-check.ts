@@ -22,7 +22,7 @@ export function useGuestChecks(status?: GuestCheckStatus) {
 
 export function useGuestCheck(id: string) {
   return useQuery({
-    queryKey: ['guest-check', id],
+    queryKey: ['guest-checks', id],
     queryFn: () => GuestCheckService.findOne(id),
     enabled: !!id,
     retry: (failureCount, error) => !isNotFound(error) && failureCount < 3,

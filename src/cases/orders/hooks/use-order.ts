@@ -9,8 +9,7 @@ export function useUpdateOrderStatus() {
   return useMutation({
     mutationFn: ({ id, status }: { id: string, status: OrderStatus }) => OrderService.updateStatus(id, status),
     onSuccess: () => {
-      // os pedidos aparecem dentro do detalhe da comanda
-      queryClient.invalidateQueries({ queryKey: ['guest-check'] })
+      // os pedidos aparecem dentro da comanda (lista e detalhe)
       queryClient.invalidateQueries({ queryKey: ['guest-checks'] })
     },
   })

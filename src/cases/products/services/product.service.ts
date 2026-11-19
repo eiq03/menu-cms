@@ -5,8 +5,10 @@ const ENDPOINT = '/products'
 
 export const ProductService = {
   // o CMS precisa ver também os produtos inativos para poder reativá-los
-  async listAll(): Promise<ProductDTO[]> {
-    const result = await api.get<ProductDTO[]>(ENDPOINT, { params: { includeInactive: true } })
+  async listAll(categoryId?: string): Promise<ProductDTO[]> {
+    const result = await api.get<ProductDTO[]>(ENDPOINT, {
+      params: { categoryId, includeInactive: true }
+    })
     return result.data
   },
 

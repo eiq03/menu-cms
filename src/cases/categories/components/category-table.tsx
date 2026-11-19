@@ -40,7 +40,7 @@ export function CategoryTable({
                         <TableRow key={category.id}>
                             <TableCell className="pl-4">
                                 {category.icon ? (
-                                    <img src={category.icon} className="size-8 object-contain" />
+                                    <img src={category.icon} alt={category.name} className="size-8 object-contain" />
                                 ) : (
                                     <Utensils className="size-8 text-brand" />
                                 )}

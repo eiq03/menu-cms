@@ -12,7 +12,7 @@ export function useSpots() {
 
 export function useSpot(id: string) {
   return useQuery({
-    queryKey: ['spot', id],
+    queryKey: ['spots', id],
     queryFn: () => SpotService.findOne(id),
     enabled: !!id,
   })
@@ -34,9 +34,8 @@ export function useUpdateSpot() {
 
   return useMutation({
     mutationFn: ({ id, spot }: { id: string, spot: UpdateSpotDTO }) => SpotService.update(id, spot),
-    onSuccess: (_, { id }) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['spots'] })
-      queryClient.invalidateQueries({ queryKey: ['spot', id] })
     },
   })
 }

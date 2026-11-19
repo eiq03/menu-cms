@@ -15,22 +15,18 @@ import { useProducts } from "@/cases/products/hooks/use-product"
 export function ProductPage() {
 
   const [searchParams, setSearchParams] = useSearchParams()
-  const categoryId = searchParams.get('category')
+  const categoryId = searchParams.get('categoryId') ?? undefined
 
-  const { data: products = [], isPending, isError } = useProducts()
+  // o filtro por categoria é feito pelo backend (GET /products?categoryId=)
+  const { data: products = [], isPending, isError } = useProducts(categoryId)
   const { feedback, showSuccess, showError } = useFeedback()
 
   const [dialogOpen, setDialogOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<ProductDTO | null>(null)
   const [productToDelete, setProductToDelete] = useState<ProductDTO | null>(null)
 
-  // o backend devolve todos os produtos; o filtro por categoria é feito aqui
-  const filteredProducts = categoryId
-    ? products.filter((product) => product.category?.id === categoryId)
-    : products
-
   function handleFilterChange(id: string | null) {
-    setSearchParams(id ? { category: id } : {})
+    setSearchParams(id ? { categoryId: id } : {})
   }
 
   function handleNew() {
@@ -55,18 +51,18 @@ export function ProductPage() {
         </Button>
       </div>
 
-      <ProductCategoryFilter value={categoryId} onChange={handleFilterChange} />
+      <ProductCategoryFilter value={categoryId ?? null} onChange={handleFilterChange} />
 
       <FeedbackAlert feedback={feedback} />
 
       <QueryState
         isPending={isPending}
         isError={isError}
-        isEmpty={filteredProducts.length === 0}
+        isEmpty={products.length === 0}
         emptyMessage={categoryId ? 'Nenhum produto nesta categoria.' : 'Nenhum produto cadastrado.'}
       >
         <ProductTable
-          products={filteredProducts}
+          products={products}
           onEdit={handleEdit}
           onDelete={setProductToDelete}
         />

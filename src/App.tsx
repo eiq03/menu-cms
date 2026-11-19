@@ -10,13 +10,13 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/categories" replace />} />
       <Route element={<AppLayout />}>
-        <Route path="/categories" element={<CategoryPage />} />
-        <Route path="/products" element={<ProductPage />} />
-        <Route path="/spots" element={<SpotPage />} />
-        <Route path="/guest-checks" element={<GuestCheckPage />} />
-        <Route path="/guest-checks/:id" element={<GuestCheckDetailPage />} />
+        <Route index element={<Navigate to="/categories" />} />
+        <Route path="categories" element={<CategoryPage />} />
+        <Route path="products" element={<ProductPage />} />
+        <Route path="spots" element={<SpotPage />} />
+        <Route path="guest-checks" element={<GuestCheckPage />} />
+        <Route path="guest-checks/:id" element={<GuestCheckDetailPage />} />
       </Route>
     </Routes>
   )

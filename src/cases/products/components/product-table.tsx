@@ -1,4 +1,4 @@
-import { Pencil, Trash2, Utensils } from "lucide-react"
+import { Pencil, Trash2 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/table"
 import { formatCurrency } from "@/lib/format"
 import type { ProductDTO } from "../dtos/product.dto"
+// arquivos da pasta public/ não são importados: o Vite serve direto na raiz do site
+const noProduct = "/no-product.svg"
 
 interface ProductTableProps {
     products: ProductDTO[];
@@ -42,11 +44,11 @@ export function ProductTable({
                     {products.map((product) => (
                         <TableRow key={product.id}>
                             <TableCell className="pl-4">
-                                {product.picture ? (
-                                    <img src={product.picture} className="size-10 rounded-md object-cover" />
-                                ) : (
-                                    <Utensils className="size-10 text-brand" />
-                                )}
+                                <img
+                                src={product.picture ?? noProduct}
+                                alt={product.name}
+                                className="size-10 rounded-md object-cover"
+                                />
                             </TableCell>
                             <TableCell className="font-medium whitespace-normal">{product.name}</TableCell>
                             <TableCell className="whitespace-normal">{product.category?.name ?? '-'}</TableCell>

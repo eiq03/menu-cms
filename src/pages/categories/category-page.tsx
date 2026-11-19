@@ -8,7 +8,7 @@ import { CategoryDeleteDialog } from "@/cases/categories/components/category-del
 import { CategoryDialog } from "@/cases/categories/components/category-dialog"
 import { CategoryTable } from "@/cases/categories/components/category-table"
 import type { CategoryDTO } from "@/cases/categories/dtos/category.dto"
-import { useCategories } from "@/cases/categories/hooks/use-category"
+import { useCategories } from "@/cases/categories/hooks/use-categories"
 
 export function CategoryPage() {
 

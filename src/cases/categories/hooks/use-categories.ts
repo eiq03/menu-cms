@@ -12,7 +12,7 @@ export function useCategories() {
 
 export function useCategory(id: string) {
   return useQuery({
-    queryKey: ['category', id],
+    queryKey: ['categories', id],
     queryFn: () => CategoryService.findOne(id),
     enabled: !!id,
   })
@@ -34,9 +34,8 @@ export function useUpdateCategory() {
 
   return useMutation({
     mutationFn: ({ id, category }: { id: string, category: UpdateCategoryDTO }) => CategoryService.update(id, category),
-    onSuccess: (_, { id }) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] })
-      queryClient.invalidateQueries({ queryKey: ['category', id] })
       // a lista de produtos mostra o nome da categoria
       queryClient.invalidateQueries({ queryKey: ['products'] })
     },

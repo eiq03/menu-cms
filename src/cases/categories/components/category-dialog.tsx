@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { isValidUrl } from "@/lib/validators"
-import { useCreateCategory, useUpdateCategory } from "../hooks/use-category"
+import { useCreateCategory, useUpdateCategory } from "../hooks/use-categories"
 import type { CategoryDTO } from "../dtos/category.dto"
 
 interface CategoryDialogProps {

@@ -5,7 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useCategories } from "@/cases/categories/hooks/use-category"
+import { useCategories } from "@/cases/categories/hooks/use-categories"
 
 interface ProductCategoryFilterProps {
     value: string | null;

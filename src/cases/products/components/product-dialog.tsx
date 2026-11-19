@@ -21,7 +21,7 @@ import {
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { isValidUrl } from "@/lib/validators"
-import { useCategories } from "@/cases/categories/hooks/use-category"
+import { useCategories } from "@/cases/categories/hooks/use-categories"
 import { useCreateProduct, useUpdateProduct } from "../hooks/use-product"
 import type { ProductDTO, UpdateProductDTO } from "../dtos/product.dto"
 
